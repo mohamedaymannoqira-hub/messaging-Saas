@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuperAdminController;
+use Stancl\Tenancy\Middleware\PreventAccessFromTenantDomains;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Http\Controllers\SuperAdminController;
+Route::middleware([
+    'web',
+    PreventAccessFromTenantDomains::class,
+])->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::prefix('superadmin')->group(function () {
-    Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
-    Route::post('/tenants', [SuperAdminController::class, 'createTenant'])->name('superadmin.tenants.create');
+    Route::prefix('superadmin')->group(function () {
+        Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
+        Route::post('/tenants', [SuperAdminController::class, 'createTenant'])->name('superadmin.tenants.create');
+    });
 });
