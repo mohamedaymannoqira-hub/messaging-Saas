@@ -19,7 +19,7 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'messaging-saas.laravel.cloud', // النطاق الافتراضي لـ Laravel Cloud
+        'messaging-saas-main-b6vmwz.laravel.cloud/', // النطاق الافتراضي لـ Laravel Cloud
         parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST),
     ],
 
