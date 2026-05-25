@@ -35,6 +35,27 @@ return [
 
     'connections' => [
 
+        'central' => [
+        'driver' => 'mysql',
+        'url' => env('DATABASE_URL'), // يمكن أن يكون هذا هو نفسه DB_URL أو URL مختلف لقاعدة البيانات المركزية
+        'host' => env('DB_CENTRAL_HOST', '127.0.0.1'),
+        'port' => env('DB_CENTRAL_PORT', '3306'),
+        'database' => env('DB_CENTRAL_DATABASE', 'messaging_saas_central'), // اسم قاعدة البيانات المركزية
+        'username' => env('DB_CENTRAL_USERNAME', 'root'), // اسم مستخدم قاعدة البيانات المركزية
+        'password' => env('DB_CENTRAL_PASSWORD', ''), // كلمة مرور قاعدة البيانات المركزية
+        'unix_socket' => env('DB_CENTRAL_SOCKET', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => null,
+        'options' => extension_loaded('pdo_mysql') ? array_filter([
+            PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+             ]) : [],
+        ],
+
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
